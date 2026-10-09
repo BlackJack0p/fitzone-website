@@ -14,8 +14,9 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#bio">Trainer Bio</a></li>
-                <li><a href="#classSchedule">Class Schedule</a></li>
+                <li><a href="#class-schedule">Class Schedule</a></li>
                 <li><a href="#membership">Membership Tiers</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -32,7 +33,7 @@
         <section id="about" class="about">
             <div class="about-content">
                 <p class="eyebrow">ABOUT FITZONE</p>
-                <h2>More Than Juas a <span>Gym.</span></h2>
+                <h2>More Than Just a <span>Gym.</span></h2>
                 <p class="about-text">
                     At FitZone, we believe fitness is about more than lifting weights. It is about building confidence, developing healthy habits, and becoming stronger every day.
                 </p>
@@ -65,14 +66,24 @@
                         <h3>James Carter</h3> 
                         <p class="trainer-speciality">Strength Training</p> 
                         <p> James helps members build strength, improve technique, and develop effective workout habits. </p> 
+                        <address>
+                            <a href="mailto:james@fitzone.com">
+                                james@fitzone.com
+                            </a>
+                          </address>
                     </div>
                 </article>
-                <article class="trainer-info">
+                <article class="trainer-card">
                     <img src="images/trainer-2.jpg" alt="Fitness trainer leading a group workout"> 
                     <div class="trainer-info"> 
                         <h3>Sarah Mitchell</h3> 
                         <p class="trainer-speciality">Group Fitness</p> 
                         <p> Sarah brings energy to every class and helps members stay motivated while reaching their goals. </p>
+                        <address>
+                            <a href="mailto:sarah@fitzone.com">
+                                sarah@fitzone.com
+                            </a>
+                        </address>
                     </div>    
                 </article>
                 <article class="trainer-card"> 
@@ -81,6 +92,11 @@
                         <h3>Daniel Brooks</h3> 
                         <p class="trainer-speciality">Personal Training</p> 
                         <p> Daniel creates personalised training approaches to help members improve fitness and confidence. </p> 
+                        <address>
+                            <a href="mailto:daniel@fitzone.com">
+                                daniel@fitzone.com
+                            </a>
+                        </address>
                     </div> 
                 </article>
             </div>
@@ -94,11 +110,13 @@
             <div class="schedule-table">
                 <table>
                     <thead>
-                        <th scope="col">Class</th>
-                        <th scope="col">Day</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Trainer</th> 
-                        <th scope="col">Level</th>
+                        <tr>
+                            <th scope="col">Class</th>
+                            <th scope="col">Day</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Trainer</th> 
+                            <th scope="col">Level</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr> 
@@ -156,7 +174,7 @@
                         <li>Access during standard hours</li> 
                         <li>Independent workouts</li> 
                     </ul> 
-                    <a href="#contact" class="membership-button"> Choose Basic </a> 
+                    <a href="mailto:info@fitzone.example?subject=Basic%20Membership" class="membership-button"> Choose Basic </a> 
                 </article>
                 <article class="membership-card"> 
                     <h3>Standard</h3> 
@@ -167,7 +185,7 @@
                         <li>Group fitness classes</li> 
                         <li>Fitness assessment</li> 
                     </ul> 
-                    <a href="#contact" class="membership-button"> Choose Standard </a> 
+                    <a href="mailto:info@fitzone.example?subject=Standard%20Membership" class="membership-button"> Choose Standard </a> 
                 </article>
                 <article class="membership-card"> 
                     <h3>Premium</h3> 
@@ -178,10 +196,27 @@
                         <li>Personal training session</li> 
                         <li>Priority class booking</li> 
                     </ul> 
-                    <a href="#contact" class="membership-button"> Choose Premium </a> 
+                    <a href="mailto:info@fitzone.example?subject=Premium%20Membership" class="membership-button"> Choose Premium</a> 
                 </article>
             </div>
         </section>
     </main>
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <!--Studio contact details-->
+            <section class="studio-contact">
+                <h2>Contact FitZone</h2>
+                <p>Have questions about our classes or memberships? Get in touch with our team.</p>
+                <address>
+                    <p> Email: <a href="mailto:info@fitzone.example"> info@fitzone.com </a> </p>
+                    <p> Phone: <a href="tel:+27000000000"> +27 00 000 0000 </a> </p>
+                    <p> Address: 123 Fitness Street, Ballito </p>
+                </address>
+            </section>
+        </div>
+        <p class="footer-bottom">
+            &copy; 2026 FitZone Fitness Studio. All rights reserved.
+        </p>
+    </footer>
 </body>
 </html>
