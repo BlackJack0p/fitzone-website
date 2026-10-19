@@ -1,0 +1,42 @@
+export const classes = [
+  {
+    id: 1,
+    name: 'Strength Training',
+    day: 'Monday',
+    time: '07:00–08:00',
+    trainer: 'James Carter',
+    level: 'Intermediate',
+  },
+  {
+    id: 2,
+    name: 'Group Fitness',
+    day: 'Tuesday',
+    time: '17:00–18:00',
+    trainer: 'Sarah Mitchell',
+    level: 'All Levels',
+  },
+  {
+    id: 3,
+    name: 'Personal Training',
+    day: 'Wednesday',
+    time: '09:00–10:00',
+    trainer: 'Daniel Brooks',
+    level: 'All Levels',
+  },
+  {
+    id: 4,
+    name: 'Strength Training',
+    day: 'Thursday',
+    time: '17:30–18:30',
+    trainer: 'James Carter',
+    level: 'Intermediate',
+  },
+  {
+    id: 5,
+    name: 'Group Fitness',
+    day: 'Saturday',
+    time: '09:00–10:00',
+    trainer: 'Sarah Mitchell',
+    level: 'All Levels',
+  },
+]

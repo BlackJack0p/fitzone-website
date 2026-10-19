@@ -1,12 +1,26 @@
 import { useState } from 'react'
+import { Header } from './components/Header'
+import { Hero } from './components/Hero'
+import { Trainers } from './components/Trainers'
+import { ClassSchedule } from './components/ClassSchedule'
+import { Memberships } from './components/Memberships'
+import { Footer } from './components/Footer'
 
+function App() {
+  const [count, setCount] = useState(0)
 
-function App() { 
   return (
     <div>
-      <h1 className='text-4xl font-bold text-primary'>FitZone</h1>
+      <Header />
+      <Hero />
+      <Trainers />
+      <ClassSchedule />
+      <Memberships />
+      <Footer />
     </div>
+    
   )
 }
+
 
 export default App
