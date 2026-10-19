@@ -1,4 +1,3 @@
-
 export function Footer() {
   return (
     <footer id="contact" className="border-t border-line bg-surface px-4 py-10 sm:px-6 lg:px-8">

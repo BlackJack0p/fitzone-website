@@ -1,4 +1,3 @@
-
 import { memberships } from '../data/memberships'
 
 export function Memberships() {
