@@ -26,7 +26,7 @@ export function Footer() {
       </div>
 
       <div className="mx-auto mt-8 w-full max-w-[1100px] border-t border-line pt-6 text-center text-sm text-text-muted">
-        <p>© 2026 FitZone Fitness Studio. All rights reserved.</p>
+        <p>&copy; 2026 FitZone Fitness Studio. All rights reserved.</p>
       </div>
     </footer>
   )
