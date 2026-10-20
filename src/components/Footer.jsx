@@ -1,24 +1,32 @@
 export function Footer() {
   return (
-    <footer id="contact" className="border-t border-line bg-surface px-4 py-10 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2">
+    <footer id="contact" className="mt-3 border-t border-line bg-[#0b0b0b] px-4 py-10 sm:px-6 lg:px-10">
+      <div className="mx-auto grid w-full max-w-[1100px] gap-8 sm:grid-cols-2">
         <div>
-          <a href="#home" className="text-2xl font-bold text-text">Fit<span className="text-primary">Zone</span></a>
-          <p className="mt-3 max-w-sm text-text-muted">Build strength, improve your fitness, and become stronger with FitZone.</p>
+          <h2 className="text-xl font-bold text-text">Contact FitZone</h2>
+          <p className="mt-3 text-text-muted">Questions about our classes or memberships?</p>
+          <p className="mt-1 text-text-muted">Our team is here to help.</p>
         </div>
 
         <div>
-          <h2 className="text-lg font-bold text-text">Contact Us</h2>
-          <ul className="mt-3 space-y-2 text-text-muted">
-            <li>Email:{' '}<a href="mailto:info@fitzone.com" className="hover:text-primary">info@fitzone.com</a></li>
-            <li>Phone: <a href="tel:+27123456789" className="hover:text-primary">+27 12 345 6789</a></li>
-            <li>Address: Your gym address here</li>
+          <h3 className="text-lg font-bold text-text">Get in Touch</h3>
+
+          <ul className="mt-3 space-y-3 text-text-muted">
+            <li><span className="font-semibold text-text">Email: </span>
+              <a href="mailto:juan.steyn.bbp@gmail.com" className="break-words transition-colors duration-300 hover:text-primary">
+                juan.steyn.bbp@gmail.com
+              </a>
+            </li>
+
+            <li><span className="font-semibold text-text">Phone: </span> <a href="tel:+27000000000" className="transition-colors duration-300 hover:text-primary">+27 00 000 0000</a></li>
+
+            <li><span className="font-semibold text-text">Address: </span> 123 Fitness Street, Ballito</li>
           </ul>
         </div>
       </div>
 
-      <div className="mx-auto mt-8 max-w-6xl border-t border-line pt-6 text-center text-sm text-text-muted">
-        <p> © {new Date().getFullYear()} FitZone. All rights reserved.</p>
+      <div className="mx-auto mt-8 w-full max-w-[1100px] border-t border-line pt-6 text-center text-sm text-text-muted">
+        <p>© 2026 FitZone Fitness Studio. All rights reserved.</p>
       </div>
     </footer>
   )

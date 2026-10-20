@@ -1,21 +1,32 @@
 export function Header() {
-  return (
-    <header className="sticky top-0 z-50 border-b border-line bg-background">
-      <nav className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-4 sm:flex-row">
-        
-        {/* Logo */}
-        <a href="#home" className="text-2xl font-bold text-text">Fit<span className="text-primary">Zone</span></a>
+  const navLinks = [
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Trainer Bio', href: '#bio' },
+    { label: 'Class Schedule', href: '#class-schedule' },
+    { label: 'Membership Tiers', href: '#membership' },
+    { label: 'Contact', href: '#contact' },
+  ]
 
-        {/* Navigation links */}
-        <ul className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm sm:gap-x-5">
-          <li><a href="#home" className="text-text-muted transition-colors hover:text-primary">Home</a></li>
-          <li><a href="#about" className="text-text-muted transition-colors hover:text-primary">About</a></li>
-          <li><a href="#bio" className="text-text-muted transition-colors hover:text-primary">Trainers</a></li>
-          <li><a href="#class-schedule" className="text-text-muted transition-colors hover:text-primary">Classes</a></li>
-          <li><a href="#membership" className="text-text-muted transition-colors hover:text-primary">Membership</a></li>
-          <li><a href="#contact" className="text-text-muted transition-colors hover:text-primary">Contact</a></li>
+  return (
+    <header className="sticky top-0 z-50 border-b border-line bg-[#101010]/95 backdrop-blur-xl">
+      <nav className="mx-auto flex min-h-[76px] w-full max-w-[1100px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 sm:px-6 lg:px-0 max-[520px]:justify-center">
+        <a href="#home" className="shrink-0 whitespace-nowrap text-2xl font-extrabold tracking-[-1px] text-text">
+          Fit<span className="text-primary">Zone</span>
+        </a>
+
+        <ul className="flex flex-wrap items-center justify-end gap-1 max-[520px]:justify-center">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <a href={link.href}
+                className="block rounded-md px-2 py-2 text-sm font-semibold text-text-muted transition-colors duration-300 hover:bg-surface hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:px-3">
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
   )
 }
+

@@ -5,6 +5,7 @@ import { Trainers } from './components/Trainers'
 import { ClassSchedule } from './components/ClassSchedule'
 import { Memberships } from './components/Memberships'
 import { Footer } from './components/Footer'
+import { About } from './components/About'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,10 +13,15 @@ function App() {
   return (
     <div>
       <Header />
-      <Hero />
-      <Trainers />
-      <ClassSchedule />
-      <Memberships />
+
+      <main>
+        <Hero />
+        <About />
+        <Trainers />
+        <ClassSchedule />
+        <Memberships />
+      </main>
+      
       <Footer />
     </div>
     

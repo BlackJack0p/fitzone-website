@@ -1,34 +1,22 @@
 export function Hero() {
   return (
-    <section
-      id="home"
-      className="flex min-h-[70vh] items-center bg-background px-4 py-16 sm:px-6 lg:px-8"
-    >
-      <div className="mx-auto w-full max-w-6xl">
-        {/* Small introduction */}
-        <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-primary">
-          Your fitness journey starts here
-        </p>
+    <section id="home" className="flex min-h-[430px] flex-col items-start justify-center border-b border-line px-4 py-20 sm:px-6 lg:min-h-[65vh] lg:px-10">
+      <div className="mx-auto w-full max-w-[1100px]">
+        <p className="mb-5 text-xs font-extrabold uppercase tracking-[3px] text-primary sm:text-sm">Your Fitness Journey Starts Here</p>
 
-        {/* Main heading */}
-        <h1 className="max-w-3xl text-4xl font-extrabold leading-tight text-text sm:text-5xl lg:text-7xl">
-          Build Strength.<span className="block text-primary">Become Stronger.</span>
+        <h1 className="mb-6 max-w-[850px] text-4xl font-extrabold leading-[1.05] tracking-tight text-text sm:text-6xl lg:text-7xl">
+          Build <span className="text-primary">Strength.</span> Become{' '} <span className="text-primary">Stronger.</span>
         </h1>
-
-        {/* Description */}
-        <p className="mt-6 max-w-2xl text-base leading-7 text-text-muted sm:text-lg">
-          Train with experienced instructors, join motivating fitness
-          classes, and find a membership that suits your goals.
-          Start building a stronger, healthier you with FitZone.
+        <p className="max-w-[600px] text-base leading-8 text-text-muted sm:text-lg">
+          <p className="max-w-[600px] text-base leading-8 text-text-muted sm:text-lg">
+          From your first workout to your next personal best, FitZone gives you the classes, expert guidance, and supportive community you need to reach your fitness goals.
         </p>
-
-        {/* Buttons */}
+        </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <a href="#membership" className="rounded-lg bg-primary px-6 py-3 font-bold text-background transition-colors hover:bg-primary-hover">
+          <a href="#membership" className="inline-flex min-h-[46px] items-center justify-center rounded-md border-2 border-primary bg-primary px-6 py-3 font-bold text-[#111111] transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-hover hover:bg-primary-hover hover:shadow-lg">
             View Memberships
           </a>
-
-          <a href="#class-schedule" className="rounded-lg border border-line px-6 py-3 font-bold text-text transition-colors hover:border-primary hover:text-primary">
+          <a href="#class-schedule"className="inline-flex min-h-[46px] items-center justify-center rounded-md border-2 border-line px-6 py-3 font-bold text-text transition-colors duration-300 hover:border-primary hover:text-primary">
             View Class Schedule
           </a>
         </div>
