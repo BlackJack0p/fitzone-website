@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { formatPrice } from '../lib/format'
+import { Link } from 'react-router'
 
 export function Memberships() {
   const [memberships, setMemberships] = useState([])
@@ -150,6 +151,14 @@ export function Memberships() {
                       )}
                     </div>
 
+                    
+                    <Link
+                      to={`/memberships/${encodeURIComponent(membership.slug)}`}
+                      className="mb-3 inline-flex min-h-11 w-full items-center justify-center rounded-md border border-line px-5 py-3 text-center text-sm font-bold text-text transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    >
+                      View plan details
+                    </Link>
+
                     <a
                       href={`mailto:info@fitzone.com?subject=${encodeURIComponent(
                         `${membership.name} Membership`
@@ -162,6 +171,7 @@ export function Memberships() {
                     >
                       Choose {membership.name}
                     </a>
+
                   </div>
                 </article>
               )

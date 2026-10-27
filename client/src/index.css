@@ -70,9 +70,6 @@ select {
   outline-offset: 4px;
 }
 
-section[id] {
-  scroll-margin-top: 90px;
-}
 
 ::selection {
   background-color: var(--color-primary);
