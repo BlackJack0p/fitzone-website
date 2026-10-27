@@ -29,10 +29,10 @@ export function Footer() {
               <li className="break-words">
                 <span className="font-semibold text-text">Email: </span>
                 <a
-                  href="mailto:juan.steyn.bbp@gmail.com"
+                  href="mailto:jay.blain.css@gmail.com"
                   className="transition-colors duration-300 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
-                  juan.steyn.bbp@gmail.com
+                  jay.blain.css@gmail.com
                 </a>
               </li>
 
