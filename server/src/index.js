@@ -2,14 +2,13 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { toNodeHandler } from "better-auth/node";
-
 import { auth } from "./auth.js";
 import trainersRoutes from "./routes/trainers.js";
 import classesRoutes from "./routes/classes.js";
 import membershipsRoutes from "./routes/memberships.js";
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
 // Allow requests from the React frontend.
