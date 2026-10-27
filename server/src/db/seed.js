@@ -24,14 +24,14 @@ async function seedDatabase() {
 
     console.log("Trainers seeded.");
 
-    // Retrieve actual database IDs for linking classes to trainers.
+    // Retrieve the actual database IDs for linking classes to trainers.
     const savedTrainers = await db.select().from(trainers);
 
     const trainerIdsBySlug = new Map(
       savedTrainers.map((trainer) => [trainer.slug, trainer.id])
     );
 
-    // Replace seed trainer IDs with the matching database IDs.
+    // Add a unique slug and use the correct database trainer ID.
     const classesToInsert = classesData.map((classItem) => {
       const trainerSlug = trainerSlugBySeedId[classItem.trainerId];
       const databaseTrainerId = trainerIdsBySlug.get(trainerSlug);
@@ -42,12 +42,24 @@ async function seedDatabase() {
         );
       }
 
+      const slug = [
+        classItem.name,
+        classItem.day,
+        classItem.startTime,
+      ]
+        .join("-")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+
       return {
         ...classItem,
+        slug,
         trainerId: databaseTrainerId,
       };
     });
 
+    // Insert classes without duplicating existing slugs.
     await db
       .insert(classes)
       .values(classesToInsert)

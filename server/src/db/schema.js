@@ -78,6 +78,7 @@ export const trainers = pgTable("trainers", {
 // Scheduled classes linked to their trainer when one is assigned.
 export const classes = pgTable("classes", {
   id: serial("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
   name: text("name").notNull(),
   day: text("day").notNull(),
   startTime: text("start_time").notNull(),
@@ -87,6 +88,7 @@ export const classes = pgTable("classes", {
   }),
   level: text("level").notNull(),
 });
+
 
 // Membership plans, with short summaries for cards and extra information for detail pages.
 export const memberships = pgTable("memberships", {

@@ -1,4 +1,3 @@
-
 import { Router } from "express";
 import { asc, eq } from "drizzle-orm";
 import { db } from "../db/index.js";
