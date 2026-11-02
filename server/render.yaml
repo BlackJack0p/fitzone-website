@@ -18,3 +18,5 @@ services:
         sync: false
       - key: CLIENT_URL
         sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
