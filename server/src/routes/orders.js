@@ -130,6 +130,7 @@ router.post("/", requireAuth, async (req, res, next) => {
 });
 
 // Retrieve an order belonging to the logged-in user.
+// Also check pending transactions with Paystack.
 router.get("/:id", requireAuth, async (req, res, next) => {
   try {
     const id = Number(req.params.id);
@@ -140,7 +141,7 @@ router.get("/:id", requireAuth, async (req, res, next) => {
       });
     }
 
-    const [order] = await db
+    let [order] = await db
       .select()
       .from(orders)
       .where(
@@ -154,6 +155,67 @@ router.get("/:id", requireAuth, async (req, res, next) => {
       return res.status(404).json({
         error: "Order not found.",
       });
+    }
+
+    // Verify the transaction if the order is still pending.
+    if (
+      order.status === "pending" &&
+      order.paymentProvider === "paystack" &&
+      order.providerReference &&
+      process.env.PAYSTACK_SECRET_KEY
+    ) {
+      try {
+        const verificationResponse = await fetch(
+          `https://api.paystack.co/transaction/verify/${encodeURIComponent(order.providerReference)}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+            },
+          }
+        );
+
+        const verification = await verificationResponse.json();
+
+        if (verificationResponse.ok && verification.status) {
+          const payment = verification.data;
+
+          const matchesOrder =
+            payment.reference === order.providerReference &&
+            payment.amount === order.totalAmount &&
+            payment.currency === order.currency;
+
+          // Mark unsuccessful transactions as failed.
+          // Successful transactions are still confirmed by the webhook.
+          if (
+            matchesOrder &&
+            ["failed", "abandoned"].includes(payment.status)
+          ) {
+            const [updatedOrder] = await db
+              .update(orders)
+              .set({
+                status: "failed",
+                updatedAt: new Date(),
+              })
+              .where(
+                and(
+                  eq(orders.id, order.id),
+                  eq(orders.status, "pending")
+                )
+              )
+              .returning();
+
+            if (updatedOrder) {
+              order = updatedOrder;
+            }
+          }
+        }
+      } catch (verificationError) {
+        console.error(
+          "Could not verify pending Paystack transaction:",
+          verificationError
+        );
+      }
     }
 
     const items = await db
