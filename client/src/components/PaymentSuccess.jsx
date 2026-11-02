@@ -34,8 +34,9 @@ export function PaymentSuccess() {
         setOrder(data)
         setLoading(false)
 
-        // Stop checking once the payment has a final status.
+        // Clear the saved order once the payment has a final status.
         if (data.status === 'paid' || data.status === 'failed') {
+          sessionStorage.removeItem('pendingPaymentOrderId')
           clearInterval(intervalId)
         }
       } catch (err) {

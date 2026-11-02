@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter,Routes,Route,useParams,useNavigate, } from 'react-router'
+import { BrowserRouter, Routes, Route, useParams, useNavigate, Link } from 'react-router'
 import { Header } from './components/Header'
 import Login from './components/Login'
 import { Hero } from './components/Hero'
@@ -14,6 +14,26 @@ import { useSession } from './lib/auth-client'
 import { PaymentSuccess } from './components/PaymentSuccess'
 
 function HomePage({ onShowLogin, onSubscribe }) {
+  const [pendingOrderId, setPendingOrderId] = useState(null)
+
+    useEffect(() => {
+    function checkPendingPayment() {
+      const orderId = sessionStorage.getItem('pendingPaymentOrderId')
+      setPendingOrderId(orderId)
+    }
+
+    checkPendingPayment()
+
+    // Check again when the customer returns to this browser tab.
+    window.addEventListener('pageshow', checkPendingPayment)
+    window.addEventListener('focus', checkPendingPayment)
+
+    return () => {
+      window.removeEventListener('pageshow', checkPendingPayment)
+      window.removeEventListener('focus', checkPendingPayment)
+    }
+  }, [])
+  
   useEffect(() => {
     const targetId = window.location.hash.slice(1)
 
@@ -42,9 +62,25 @@ function HomePage({ onShowLogin, onSubscribe }) {
   }, [])
 
   return (
-    <>
-      <Header onShowLogin={onShowLogin} />
-      <main>
+  <>
+    <Header onShowLogin={onShowLogin} />
+
+    {pendingOrderId && (
+      <div className="bg-[#222222] px-4 py-4 text-center">
+        <p className="mb-2 text-white">
+          You have a payment that still needs confirmation.
+        </p>
+
+        <Link
+          to={`/payment/success?orderId=${pendingOrderId}`}
+          className="inline-block rounded-md bg-[#c8ff00] px-5 py-2 font-semibold text-black transition hover:bg-[#d8ff4d]"
+        >
+          Check Payment Status
+        </Link>
+      </div>
+    )}
+
+    <main>
         <Hero />
         <About />
         <Trainers />
@@ -108,6 +144,9 @@ function AppRoutes() {
       if (!data.authorizationUrl) {
         throw new Error('Paystack did not return a checkout URL.')
       }
+
+      // Remember the order so the customer can check its status later.
+      sessionStorage.setItem('pendingPaymentOrderId', String(data.orderId))
 
       // Redirect the customer to Paystack's hosted checkout.
       window.location.href = data.authorizationUrl
