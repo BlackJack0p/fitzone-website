@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { formatPrice } from '../lib/format'
 
-export function MembershipDetail({ slug, onBack }) {
+export function MembershipDetail({ slug, onBack, onSubscribe }) {
   const [membership, setMembership] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -171,14 +171,12 @@ export function MembershipDetail({ slug, onBack }) {
                 </section>
               )}
 
-              <a
-                href={`mailto:info@fitzone.com?subject=${encodeURIComponent(
-                  `${membership.name} Membership`
-                )}`}
+              <button type="button"
+                onClick={() => onSubscribe?.(membership.slug)}
                 className="inline-flex min-h-12 w-full items-center justify-center rounded-md border border-primary bg-primary px-5 py-3 text-center text-sm font-bold text-[#111111] transition-all hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
               >
-                Enquire about {membership.name}
-              </a>
+                Subscribe Now
+              </button>
             </div>
           </article>
         )}

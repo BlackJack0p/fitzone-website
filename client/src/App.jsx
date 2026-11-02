@@ -10,8 +10,9 @@ import { Memberships } from './components/Memberships'
 import { Footer } from './components/Footer'
 import { TrainerDetail } from './components/TrainerDetail'
 import { MembershipDetail } from './components/MembershipDetail'
+import { useSession } from './lib/auth-client'
 
-function HomePage({ onShowLogin }) {
+function HomePage({ onShowLogin, onSubscribe }) {
   useEffect(() => {
     const targetId = window.location.hash.slice(1)
 
@@ -47,13 +48,12 @@ function HomePage({ onShowLogin }) {
         <About />
         <Trainers />
         <ClassSchedule />
-        <Memberships />
+        <Memberships onSubscribe={onSubscribe} />
       </main>
       <Footer />
     </>
   )
 }
-
 
 function TrainerPage() {
   const { slug } = useParams()
@@ -67,8 +67,7 @@ function TrainerPage() {
   )
 }
 
-
-function MembershipPage() {
+function MembershipPage({ onSubscribe }) {
   const { slug } = useParams()
   const navigate = useNavigate()
 
@@ -76,28 +75,68 @@ function MembershipPage() {
     <MembershipDetail
       slug={slug}
       onBack={() => navigate('/#membership')}
+      onSubscribe={onSubscribe}
     />
   )
 }
 
 function AppRoutes() {
   const [showLogin, setShowLogin] = useState(false)
+  const [pendingMembership, setPendingMembership] = useState(null)
+
+  const { data: session, isPending } = useSession()
+
+  function handleCheckout(membershipSlug) {
+    window.alert(
+      `Checkout for the ${membershipSlug} membership will be available once payment integration is configured.`
+    )
+  }
+
+  function handleSubscribe(membershipSlug) {
+    if (isPending) return
+
+    if (!session) {
+      setPendingMembership(membershipSlug)
+      setShowLogin(true)
+      return
+    }
+
+    handleCheckout(membershipSlug)
+  }
+
+  function handleLogin() {
+    const selectedMembership = pendingMembership
+
+    setShowLogin(false)
+    setPendingMembership(null)
+
+    if (selectedMembership) {
+      handleCheckout(selectedMembership)
+    }
+  }
 
   if (showLogin) {
-    return <Login onLogin={() => {
-      setShowLogin(false)
-      window.location.href = '/'
-    }} />
+    return <Login onLogin={handleLogin} />
   }
 
   return (
     <Routes>
       <Route
         path="/"
-        element={<HomePage onShowLogin={() => setShowLogin(true)} />}
+        element={
+          <HomePage
+            onShowLogin={() => setShowLogin(true)}
+            onSubscribe={handleSubscribe}
+          />
+        }
       />
+
       <Route path="/trainers/:slug" element={<TrainerPage />} />
-      <Route path="/memberships/:slug" element={<MembershipPage />} />
+
+      <Route
+        path="/memberships/:slug"
+        element={<MembershipPage onSubscribe={handleSubscribe} />}
+      />
     </Routes>
   )
 }

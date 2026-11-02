@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { formatPrice } from '../lib/format'
 import { Link } from 'react-router'
 
-export function Memberships() {
+export function Memberships({ onSubscribe }) {
   const [memberships, setMemberships] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -159,18 +159,15 @@ export function Memberships() {
                       View plan details
                     </Link>
 
-                    <a
-                      href={`mailto:info@fitzone.com?subject=${encodeURIComponent(
-                        `${membership.name} Membership`
-                      )}`}
+                    <button type="button" onClick={() => onSubscribe?.(membership.slug)}
                       className={`mt-auto inline-flex min-h-12 w-full items-center justify-center rounded-md border px-5 py-3 text-center text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
                         featured
                           ? 'border-primary bg-primary text-[#111111] hover:brightness-110'
                           : 'border-primary/60 bg-transparent text-primary hover:bg-primary hover:text-[#111111]'
                       }`}
                     >
-                      Choose {membership.name}
-                    </a>
+                      Subscribe Now
+                    </button>
 
                   </div>
                 </article>
