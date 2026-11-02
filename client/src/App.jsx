@@ -123,6 +123,20 @@ function AppRoutes() {
 
   const { data: session, isPending } = useSession()
 
+  // Browsers can restore this document from the back/forward cache without
+  // remounting React. Reload that restored page so HomePage re-reads the saved
+  // pending order from sessionStorage.
+  useEffect(() => {
+    function handlePageShow(event) {
+      if (event.persisted) {
+        window.location.reload()
+      }
+    }
+
+    window.addEventListener('pageshow', handlePageShow)
+    return () => window.removeEventListener('pageshow', handlePageShow)
+  }, [])
+
   // Start checkout through the backend.
   async function handleCheckout(membershipSlug) {
     try {
