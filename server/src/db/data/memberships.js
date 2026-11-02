@@ -7,6 +7,7 @@ export const membershipsData = [
     fullDescription:
       "The Basic membership provides access to the gym's equipment and standard facilities. It is suitable for members who prefer to follow their own training routine and exercise independently.",
     billingPeriod: "Monthly",
+    paystackPlanCode: "PLN_qt76mb1c9273s7j",
     suitableFor:
       "Beginners and experienced gym members who prefer independent training.",
     terms:
@@ -26,6 +27,7 @@ export const membershipsData = [
     fullDescription:
       "The Standard membership combines independent gym training with group fitness classes. It gives members more opportunities to follow structured workouts and maintain a consistent exercise routine.",
     billingPeriod: "Monthly",
+    paystackPlanCode: "PLN_qyfrg77lc8siw9q",
     suitableFor:
       "Members who enjoy a combination of independent workouts and group classes.",
     terms:
@@ -45,6 +47,7 @@ export const membershipsData = [
     fullDescription:
       "The Premium membership includes the Standard benefits, priority class booking, and a personal fitness consultation. It is designed for members who want additional guidance and support with their fitness goals.",
     billingPeriod: "Monthly",
+    paystackPlanCode: "PLN_9kow713rkryej8m",
     suitableFor:
       "Members who want additional guidance and priority access to group classes.",
     terms:

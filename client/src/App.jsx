@@ -11,6 +11,7 @@ import { Footer } from './components/Footer'
 import { TrainerDetail } from './components/TrainerDetail'
 import { MembershipDetail } from './components/MembershipDetail'
 import { useSession } from './lib/auth-client'
+import { PaymentSuccess } from './components/PaymentSuccess'
 
 function HomePage({ onShowLogin, onSubscribe }) {
   useEffect(() => {
@@ -86,12 +87,40 @@ function AppRoutes() {
 
   const { data: session, isPending } = useSession()
 
-  function handleCheckout(membershipSlug) {
-    window.alert(
-      `Checkout for the ${membershipSlug} membership will be available once payment integration is configured.`
-    )
+  // Start checkout through the backend.
+  async function handleCheckout(membershipSlug) {
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ membershipSlug }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to start checkout.')
+      }
+
+      if (!data.authorizationUrl) {
+        throw new Error('Paystack did not return a checkout URL.')
+      }
+
+      // Redirect the customer to Paystack's hosted checkout.
+      window.location.href = data.authorizationUrl
+    } catch (error) {
+      console.error('Checkout error:', error)
+
+      window.alert(
+        error.message || 'Something went wrong during checkout.'
+      )
+    }
   }
 
+  // Require login before starting checkout.
   function handleSubscribe(membershipSlug) {
     if (isPending) return
 
@@ -104,6 +133,7 @@ function AppRoutes() {
     handleCheckout(membershipSlug)
   }
 
+  // Continue checkout after successful login.
   function handleLogin() {
     const selectedMembership = pendingMembership
 
@@ -121,22 +151,10 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <HomePage
-            onShowLogin={() => setShowLogin(true)}
-            onSubscribe={handleSubscribe}
-          />
-        }
-      />
-
-      <Route path="/trainers/:slug" element={<TrainerPage />} />
-
-      <Route
-        path="/memberships/:slug"
-        element={<MembershipPage onSubscribe={handleSubscribe} />}
-      />
+      <Route path="/" element={ <HomePage onShowLogin={() => setShowLogin(true)} onSubscribe={handleSubscribe}/> }/>
+      <Route path="/trainers/:slug" element={<TrainerPage />}/>
+      <Route path="/memberships/:slug" element={ <MembershipPage onSubscribe={handleSubscribe} /> }/>
+      <Route path="/payment/success" element={<PaymentSuccess />}/>
     </Routes>
   )
 }

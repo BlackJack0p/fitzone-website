@@ -98,6 +98,7 @@ export const memberships = pgTable("memberships", {
   description: text("description"),
   fullDescription: text("full_description"),
   billingPeriod: text("billing_period"),
+  paystackPlanCode: text("paystack_plan_code"),
   suitableFor: text("suitable_for"),
   terms: text("terms"),
   benefits: jsonb("benefits").notNull(),
