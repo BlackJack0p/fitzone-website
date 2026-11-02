@@ -6,6 +6,7 @@ import { auth } from "./auth.js";
 import trainersRoutes from "./routes/trainers.js";
 import classesRoutes from "./routes/classes.js";
 import membershipsRoutes from "./routes/memberships.js";
+import ordersRoutes from "./routes/orders.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,6 +30,7 @@ app.use(express.json());
 app.use("/api/trainers", trainersRoutes);
 app.use("/api/classes", classesRoutes);
 app.use("/api/memberships", membershipsRoutes);
+app.use("/api/orders", ordersRoutes);
 app.get("/", (req, res) => {
   res.send("FitZone API is running.");
 });

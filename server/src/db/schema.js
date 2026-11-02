@@ -102,3 +102,34 @@ export const memberships = pgTable("memberships", {
   terms: text("terms"),
   benefits: jsonb("benefits").notNull(),
 });
+
+// Orders placed by authenticated users.
+export const orders = pgTable("orders", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "restrict" }),
+  totalAmount: integer("total_amount").notNull(),
+  currency: text("currency").notNull().default("ZAR"),
+  status: text("status").notNull().default("pending"),
+  paymentProvider: text("payment_provider"),
+  providerReference: text("provider_reference").unique(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// Memberships included in each order.
+export const orderItems = pgTable("order_items", {
+  id: serial("id").primaryKey(),
+  orderId: integer("order_id")
+    .notNull()
+    .references(() => orders.id, { onDelete: "cascade" }),
+  membershipId: integer("membership_id").references(
+    () => memberships.id,
+    { onDelete: "set null" }
+  ),
+  membershipName: text("membership_name").notNull(),
+  quantity: integer("quantity").notNull().default(1),
+  unitPrice: integer("unit_price").notNull(),
+});
+
